@@ -27,10 +27,9 @@ app.get('/', (req, res) => {                // EndPoint "/"
 
 })
 
-
-app.get('/saludar:nombre', (req, res) => {             // EndPoint "/saludar"
-
-    res.send('Hola ${nombre}');
+//localhost:3000/saludar/ian   (req.params.nombre)
+app.get('/saludar/:nombre', (req, res) => {             // EndPoint "/saludar"
+    res.send(`Hola ${req.params.nombre}`);
 
 })
 
@@ -40,7 +39,7 @@ app.get('/validarfecha/:ano/:mes/:dia', (req, res) => {             // EndPoint 
     nan = isNaN(req.body)
     if(nan)
     {
-        res.status(200).send('Todo OK1');
+        res.status(200).send('Todo OK!');
     }else{
         res.status(400).send('Mal ingreso de datos')
     }
