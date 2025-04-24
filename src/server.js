@@ -2,6 +2,12 @@ import express  from "express"; // hacer npm i express
 
 import cors     from "cors";    // hacer npm i cors
 
+import Alumno from "./models/alumno.js"
+
+import {sumar, restar, multiplicar, dividir} from "./modules/matematica.js"
+
+import {OMDBSearchByPage, OMDBSearchComplete, OMDBGetByImdbID} from "./modules/omdb-wrapper.js"
+
 
 const app  = express();
 
@@ -23,34 +29,28 @@ app.use(express.json()); // Middleware para parsear y comprender JSON
 
 app.get('/', (req, res) => {                // EndPoint "/"
 
-    res.send('Ya estoy respondiendo!');
+    res.send('Ya estoy respondiendo!')
 
 })
 
 //localhost:3000/saludar/ian   (req.params.nombre)
 app.get('/saludar/:nombre', (req, res) => {             // EndPoint "/saludar"
-    res.send(`Hola ${req.params.nombre}`);
+    res.send(`Hola ${req.params.nombre}`)
 
 })
 
-app.get('/validarfecha/:ano/:mes/:dia', (req, res) => {             // EndPoint "/saludar"
-
-    let nan
-    nan = isNaN(req.body)
-    if(nan)
-    {
-        res.status(200).send('Todo OK!');
-    }else{
-        res.status(400).send('Mal ingreso de datos')
-    }
+//localhost:3000/validarfecha/:2024/:05/:23 
+app.get('/validarfecha/:ano/:mes/:dia', (req, res) => {
+    const { ano, mes, dia } = req.params
+    const fecha = `${ano}-${mes}-${dia}`
     
+    if (!isNaN(Date.parse(fecha))) {
+      res.sendStatus(200)
+    } else {
+      res.sendStatus(400)
+    }
+  })
 
-})
-
-
- 
-
-//
 
 // Inicio el Server y lo pongo a escuchar.
 
