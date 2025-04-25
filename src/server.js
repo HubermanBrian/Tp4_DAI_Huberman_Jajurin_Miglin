@@ -83,18 +83,18 @@ app.get('/validarfecha/:ano/:mes/:dia', (req, res) => {
     res.status(200).send(`El resultado es ${resultado}`)
   })
 
-  app.get('/omdb/searchbypage', (req, res) => {
+  app.get('/omdb/searchbypage', async (req, res) => {
 
    const search = req.query.search 
    const p = parseInt(req.query.pagina)
-   const resultado = OMDBSearchByPage(search,p)
+   const resultado = await OMDBSearchByPage(search,p)
    res.status(200).send(`El resultado es ${resultado}`)
 
   })
-  app.get('/omdb/searchcomplete', (req, res) => {
+  app.get('/omdb/searchcomplete', async (req, res) => {
 
     const search = req.query.search 
-    const resultado = OMDBSearchComplete(search)
+    const resultado = await OMDBSearchComplete(search)
     res.status(200).send(`El resultado es ${resultado}`)
  
    })
