@@ -110,35 +110,21 @@ app.get('/validarfecha/:ano/:mes/:dia', (req, res) => {
     res.status(200).send(`El resultado es ${resultado}`)
    })
 
-   app.get('/alumnos/:dni', (req, res) => {
-
-    const alumnosArray = [] ;
+   const alumnosArray = [] ;
     alumnosArray.push(new Alumno("Esteban Dido"  , "22888444", 20));
     alumnosArray.push(new Alumno("Matias Queroso", "28946255", 51));
     alumnosArray.push(new Alumno("Elba Calao"    , "32623391", 18));
-    const dni = req.params.dni
-    let encontrado = false
-    function checkDni(dni){
-      let i = 0;
-      do{
-        if(alumnosArray[i].dni = dni){
-          encontrado = true
-        }
-        else
-        {
-          i++
-        }
-        
-      }while(encontrado != true || i >= alumnosArray.length)
-      return i;
-    }
-    const pos = alumnosArray.findIndex(checkDni)
-    console.log(pos)
-    /*if(pos!= undefined){
-      Alumno persona = alumnosArray[pos]
-      res.status(200).send(`El resultado es ${resultado}`)
-    }*/
+   app.get('/alumnos/:dni', (req, res) => {
+
     
+    const dni = req.params.dni;
+    const alumno = alumnosArray.find(a => a.dni == dni);
+
+  if (alumno) {
+    res.status(200).json(alumno);
+  } else {
+    res.status(404).send('Alumno no encontrado');
+  }
    })
 // Inicio el Server y lo pongo a escuchar.
 
