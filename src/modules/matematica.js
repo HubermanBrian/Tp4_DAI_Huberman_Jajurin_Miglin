@@ -25,4 +25,4 @@ const dividir = (a, b) => {
 
 };
 // Exporto todo lo que yo quiero exponer del módulo hacia el exterior.
-export {PI, sumar, multiplicar, array};
+export {sumar, restar, multiplicar, dividir};

@@ -52,6 +52,60 @@ app.get('/validarfecha/:ano/:mes/:dia', (req, res) => {
   })
 
 
+  app.get('/matematica/sumar', (req, res) => {
+
+    const num1 = parseFloat(req.query.n1)
+    const num2 = parseFloat(req.query.n2)
+    const resultado = sumar(num1,num2)
+    res.status(200).send(`El resultado es ${resultado}`)
+
+  })
+  app.get('/matematica/restar', (req, res) => {
+
+    const num1 = parseFloat(req.query.n1)
+    const num2 = parseFloat(req.query.n2)
+    const resultado = restar(num1,num2)
+    res.status(200).send(`El resultado es ${resultado}`)
+
+  })
+  app.get('/matematica/multiplicar', (req, res) => {
+
+    const num1 = parseFloat(req.query.n1)
+    const num2 = parseFloat(req.query.n2)
+    const resultado = multiplicar(num1,num2)
+    res.status(200).send(`El resultado es ${resultado}`)
+  })
+  app.get('/matematica/dividir', (req, res) => {
+
+    const num1 = parseFloat(req.query.n1)
+    const num2 = parseFloat(req.query.n2)
+    const resultado = dividir(num1,num2)
+    res.status(200).send(`El resultado es ${resultado}`)
+  })
+
+  app.get('/omdb/searchbypage', (req, res) => {
+
+   const search = req.query.search 
+   const p = parseInt(req.query.pagina)
+   const resultado = OMDBSearchByPage(search,p)
+   res.status(200).send(`El resultado es ${resultado}`)
+
+  })
+  app.get('/omdb/searchcomplete', (req, res) => {
+
+    const search = req.query.search 
+    const resultado = OMDBSearchComplete(search)
+    res.status(200).send(`El resultado es ${resultado}`)
+ 
+   })
+
+
+   app.get('/alumnos', (req, res) => {
+
+    const resultado = Alumno.getAlumnosArray()
+    res.status(200).send(`El resultado es ${resultado}`)
+ 
+   })
 // Inicio el Server y lo pongo a escuchar.
 
 //

@@ -6,7 +6,6 @@ const agent = new https.Agent({
 });
 
 const APIKEY = "82222212";
-let searchText = ""
 
 const OMDBSearchByPage = async (searchText, page = 1) => {
     let returnObject = {
