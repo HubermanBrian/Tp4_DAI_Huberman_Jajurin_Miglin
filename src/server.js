@@ -88,14 +88,21 @@ app.get('/validarfecha/:ano/:mes/:dia', (req, res) => {
    const search = req.query.search 
    const p = parseInt(req.query.pagina)
    const resultado = await OMDBSearchByPage(search,p)
-   res.status(200).send(`El resultado es ${resultado}`)
+   res.status(200).send(resultado)
 
   })
   app.get('/omdb/searchcomplete', async (req, res) => {
 
     const search = req.query.search 
     const resultado = await OMDBSearchComplete(search)
-    res.status(200).send(`El resultado es ${resultado}`)
+    res.status(200).send(resultado)
+ 
+   })
+   app.get('/omdb/OMDBGetByImdbID', async (req, res) => {
+
+    const imdb = req.query.imdbID 
+    const resultado = await OMDBGetByImdbID(imdb)
+    res.status(200).send(resultado)
  
    })
 
@@ -110,11 +117,11 @@ app.get('/validarfecha/:ano/:mes/:dia', (req, res) => {
     res.status(200).send(`El resultado es ${resultado}`)
    })
 
-   const alumnosArray = [] ;
-    alumnosArray.push(new Alumno("Esteban Dido"  , "22888444", 20));
-    alumnosArray.push(new Alumno("Matias Queroso", "28946255", 51));
-    alumnosArray.push(new Alumno("Elba Calao"    , "32623391", 18));
-   app.get('/alumnos/:dni', (req, res) => {
+    const alumnosArray = [] ;
+    alumnosArray.push(new Alumno("Esteban Dido"  , "22888444", 20))
+    alumnosArray.push(new Alumno("Matias Queroso", "28946255", 51))
+    alumnosArray.push(new Alumno("Elba Calao"    , "32623391", 18))
+    app.get('/alumnos/:dni', (req, res) => {
 
     
     const dni = req.params.dni;
@@ -126,6 +133,14 @@ app.get('/validarfecha/:ano/:mes/:dia', (req, res) => {
     res.status(404).send('Alumno no encontrado');
   }
    })
+
+  app.post('/alumnos', (req, res) => {
+  let alumnoRecibido = req.body
+  let nuevoAlumno = new Alumno(alumnoRecibido.username, alumnoRecibido.dni, alumnoRecibido.edad)
+  alumnosArray.push(nuevoAlumno)
+  res.sendStatus(201)
+});
+ 
 // Inicio el Server y lo pongo a escuchar.
 
 //
